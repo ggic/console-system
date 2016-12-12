@@ -1,0 +1,5 @@
+############## loading模态 ##############
+<div class="modal fade" id="progressModal" data-backdrop="static" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div id="progress" class="progress progress-bar progress-bar-striped active " >
+    </div>
+</div>

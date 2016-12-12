@@ -1,0 +1,14 @@
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="#springUrl('/resources/js/widgets/bootstrap/jquery.min.js')"></script>
+<script src="#springUrl('/resources/js/widgets/bootstrap/bootstrap.min.js')"></script>
+<script src="#springUrl('/resources/js/widgets/plugins/bootstrap.ourjs.js')"></script>
+##<script src="#springUrl('/resources/js/bootstrap/holder.js')"></script>
+##<script src="#springUrl('/resources/js/bootstrap/ie-emulation-modes-warning.js')"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+##<script src="#springUrl('/resources/js/bootstrap/ie10-viewport-bug-workaround.js')"></script>
+##<script src="#springUrl('/resources/js/widgets/datepicker/locales/bootstrap-datetimepicker.zh-CN.js')" charset="UTF-8"></script>
+
+
+
+

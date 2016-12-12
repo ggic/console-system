@@ -1,0 +1,40 @@
+#parse('/layout/child-page-header.vm')
+<div class="page-main">
+
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            权限分配
+        </div>
+        ##    表单头
+        <div class="panel-body">
+
+            <div class="form-group">
+                <button type="button" id="btn_submit" submit-url="#springUrl('/order/instOrder/query')"
+                        class="btn btn-primary">增加用户</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <table id="resultgrid" class="table table-striped table-hover"></table>
+    ##结果表格
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            用户列表
+        </div>
+        <div class="panel-body">
+            <table id="resultgrid" class="table table-striped table-hover"></table>
+        </div>
+    </div>
+    ##分页控件
+    <div>
+        <div class="pagination-info">总记录数：<span id="totalItems"></span> |  总页数：<span id="totalPages"></span> </div>
+        <ul  id="pagination" style="float:right"></ul>
+    </div>
+
+
+
+    #parse('/layout/child-page-footer.vm')
+    <script src="#springUrl('/resources/js/business/order/instOrder.js')"></script>

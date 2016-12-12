@@ -1,0 +1,60 @@
+#parse('/layout/child-page-header.vm')
+<div class="page-main">
+
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            渠道类生成
+        </div>
+    ##    表单头
+        <div class="panel-body">
+            <form class="navbar-form navbar-left" action="#springUrl('/system/classGenerator/import')" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <input type="file" name="file" id="upload-file" />
+            </div>
+            <div class="form-group">
+                <button type="submit"  class="btn btn-primary">导入</button>
+            </div>
+            </form>
+            <div class="navbar-form">
+                <label for="code">编号</label>
+                <select class="form-control" name="code" id="code" placeholder="编号">
+                    #foreach( $o  in $interfaceInfo.entrySet() )
+                        <option value="$o.key">$o.value.description ($o.key)</option>
+                    #end
+                </select>
+                <div class="form-group">
+                    <button type="button" id="btn_submit" submit-url="#springUrl('/system/classGenerator/genClass')" class="btn btn-primary">生成</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+##结果表格
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            查询结果
+        </div>
+
+        <div class="panel-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#I" aria-controls="I" role="tab" data-toggle="tab">类模板</a></li>
+                    <li role="presentation"><a href="#T" aria-controls="T" role="tab" data-toggle="tab">测试模板</a></li>
+                    <li role="presentation"><a href="#M" aria-controls="M" role="tab" data-toggle="tab">MOCK模板</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="I"></div>
+                    <div role="tabpanel" class="tab-pane" id="T"></div>
+                    <div role="tabpanel" class="tab-pane" id="M"></div>
+                </div>
+        </div>
+    </div>
+
+
+    #parse('/layout/child-page-footer.vm')
+    <script src="#springUrl('/resources/js/business/system/classGenertator.js')"></script>
+
+
+

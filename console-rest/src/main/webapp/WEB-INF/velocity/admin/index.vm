@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>System Console</title>
+      #parse('/layout/header.vm')
+  </head>
+
+  <body role="document" >
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">System Console</a>
+        </div>
+        <div class="navbar-collapse collapse">
+##            动态菜单
+            <ul class="nav navbar-nav" id="navbar"></ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">
+                    ${currentUser.fullName} (
+                    #foreach ($element in $currentUser.roles)
+                        $element.roleName
+                    #end
+                    )</a></li>
+                <li><a href="#">$loginDate</a></li>
+                <li><a href="#springUrl('/')">注销</a></li>
+            </ul>
+        </div>
+          <!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- main  -->
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe id="main" class="embed-responsive-item" allowfullscreen="" src=""></iframe>
+    </div>
+     <!-- /container -->
+
+    #parse('/layout/footer.vm')
+    <script src="#springUrl('/resources/js/business/admin/index.js')"></script>
+    <script>
+        var jsonData = $menus;
+        var user = '${currentUser.fullName}';
+        if(user!=''&&user.length >0){
+            $.messager.popup(user+",欢迎你");
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserMapper">
+    <resultMap id="userResult" type="com.snoweagle.console.common.domain.system.User">
+        <id column="USER_ID" property="userId" jdbcType="INTEGER"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="FULL_NAME" property="fullName" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+        <result column="VALID_FLG" property="validFlg" jdbcType="CHAR"/>
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+        <collection property="roles" javaType="java.util.Set" resultMap="roleResult"/>
+    </resultMap>
+
+    <resultMap id="roleResult" type="com.snoweagle.console.common.domain.system.Role">
+        <id column="ROLE_ID" property="roleId" jdbcType="INTEGER"/>
+        <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+       USER_ID, NAME, PASSWORD, FULL_NAME,EMAIL, PHONE, VALID_FLG, CREATE_DATE, MODIFY_DATE
+  </sql>
+    <select id="selectUserByDynamicParams" resultMap="userResult"
+            parameterType="com.snoweagle.console.common.domain.system.User">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sys_user
+        where 1=1
+        <if test="userId !=null and userId !=''">
+            and USER_ID like CONCAT('%',#{userId,jdbcType=INTEGER},'%')
+        </if>
+        <if test="name != null and name!=''">
+            and NAME like CONCAT('%',#{name ,jdbcType=VARCHAR},'%')
+        </if>
+        order by modify_date desc
+    </select>
+    <select id="login" resultMap="userResult" parameterType="java.util.Map">
+         select
+          u.USER_ID, u.NAME, PASSWORD, FULL_NAME,EMAIL, PHONE, VALID_FLG,r.ROLE_ID ,ROLE_NAME
+        from t_sys_user u
+        left join t_sys_user_role ur on ur.USER_ID = u.user_id
+        join t_sys_role r on ur.role_id = r.role_id
+        where u.NAME = #{userName ,jdbcType=VARCHAR }
+        and PASSWORD = #{passWord ,jdbcType=VARCHAR }
+    </select>
+    <select id="selectByPrimaryKey" resultMap="userResult" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sys_user
+        where USER_ID = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.snoweagle.console.common.domain.system.User" >
+
+        insert into t_sys_user (USER_ID, NAME, PASSWORD,
+        FULL_NAME, EMAIL, PHONE,
+        VALID_FLG,CREATE_DATE, MODIFY_DATE)
+        values (null, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{fullName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},'Y',#{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.snoweagle.console.common.domain.system.User" >
+
+        insert into t_sys_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                USER_ID,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="password != null" >
+                PASSWORD,
+            </if>
+            <if test="fullName != null" >
+                FULL_NAME,
+            </if>
+            <if test="email != null" >
+                EMAIL,
+            </if>
+            <if test="phone != null" >
+                PHONE,
+            </if>
+            <if test="validFlg != null" >
+                VALID_FLG,
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE,
+            </if>
+            <if test="modifyDate != null" >
+                MODIFY_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null" >
+                #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="validFlg != null" >
+                #{validFlg,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyDate != null" >
+                #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.snoweagle.console.common.domain.system.User" >
+
+        update t_sys_user
+        <set >
+            <if test="userId != null" >
+                USER_ID = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                PASSWORD = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null" >
+                FULL_NAME = #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                PHONE = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="validFlg != null" >
+                VALID_FLG = #{validFlg,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null" >
+                CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyDate != null" >
+                MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=INTEGER}
+    </update>
+</mapper>

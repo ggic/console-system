@@ -1,0 +1,52 @@
+#parse('/layout/child-page-header.vm')
+<div class="page-main">
+
+<div class="panel panel-info">
+
+    <div class="panel-heading">
+        机构订单查询
+    </div>
+
+############ 表单头 ############
+    <div class="panel-body">
+        <form class="navbar-form navbar-left" >
+            <div class="form-group">
+                <label for="inst-no">机构订单号</label>
+                <input type="text" name="instOrderNo" class="form-control" placeholder="机构订单号" />
+                <label for="panemnt-no">支付订单号</label>
+                <input type="text" name="paymentSeqNo" class="form-control" placeholder="支付订单号" />
+                <label>创建日期</label>
+
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd"
+                     data-link-field="dtp_input2"  >
+                    <input class="form-control" name="gmtStart"  size="5" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+
+                </div>-
+                <div class="input-group date form_date col-md-5" data-date="" data-date-format="yyyy-mm-dd"
+                     data-link-field="dtp_input2" >
+                    <input class="form-control"  name="gmtEnd"  size="5" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="channel-api-code">渠道API</label>
+                <input type="text" name="fundChannelApi" class="form-control" placeholder="渠道API" />
+            </div>
+
+            <div class="form-group">
+                <button type="button" id="btn_submit" submit-url="#springUrl('/order/instOrder/query')" class="btn btn-primary">提交</button>
+            </div>
+            <div class="form-group">
+                <button type="reset"  class="btn btn-primary">重置</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+#parse('/layout/query-result-pagination.vm')
+#parse('/layout/loading-modal.vm')
+#parse('/layout/child-page-footer.vm')
+<script src="#springUrl('/resources/js/business/order/instOrder.js')"></script>

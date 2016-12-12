@@ -1,0 +1,132 @@
+#parse('/layout/child-page-header.vm')
+<div class="page-main">
+
+    <div class="panel panel-info">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            权限分配
+        </div>
+        ##    表单头
+        <div class="panel-body">
+
+            <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#addUserModal" >增加用户</button>
+
+        </div>
+    </div>
+
+    ##结果表格
+    <div class="panel panel-default" style="float:left;width: 800px">
+        <div class="panel-heading">
+            用户列表
+        </div>
+        <div class="panel-body" >
+            <table id="resultgrid" primaryKey="required" class="table table-striped table-hover"></table>
+        </div>
+    ##分页控件
+        <div>
+            <div class="pagination-info">总记录数：<span id="totalItems"></span> |  总页数：<span id="totalPages"></span> </div>
+            <ul  id="pagination" style="float:right"></ul>
+        </div>
+    </div>
+
+    <div class="collapse" id="collapseExample" style="float:left;width: 600px">
+        <div class="well">
+            ...
+        </div>
+    </div>
+
+
+############## 弹出模态-增加用户 ##############
+    <!-- Modal -->
+
+    <div  class="modal fade" id="addUserModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">增加用户</h4>
+                </div>
+                <form id="addUserForm" >
+                <div class="modal-body" style="width:350px">
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">用户名:</label>
+                            <input type="text" class="form-control" name="name"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">密码:</label>
+                            <input type="text" class="form-control" name="password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">姓名:</label>
+                            <input type="text" class="form-control" name="fullName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">电话:</label>
+                            <input type="text" class="form-control" name="phone"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">邮箱:</label>
+                            <input type="text" class="form-control" name="email"/>
+                        </div>
+
+                   </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btn_submit_addUser" submit-url="#springUrl('/system/user/add')" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+############## 弹出模态 ##############
+
+############## 弹出模态 ##############
+    <!-- Modal -->
+    <div  class="modal fade" id="editUserModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">修改用户</h4>
+                </div>
+                <form id="editUserForm" >
+                    <div class="modal-body" style="width:350px">
+                        <input type="hidden" class="form-control" name="userId"  />
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">用户名:</label>
+                            <input type="text" class="form-control" name="name"  readonly/>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">密码:</label>
+                            <input type="text" class="form-control" name="password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">姓名:</label>
+                            <input type="text" class="form-control" name="fullName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">电话:</label>
+                            <input type="text" class="form-control" name="phone"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">邮箱:</label>
+                            <input type="text" class="form-control" name="email"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btn_submit_editUser" submit-url="#springUrl('/system/user/edit')" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+############## 弹出模态 ##############
+
+    #parse('/layout/loading-modal.vm')
+    #parse('/layout/child-page-footer.vm')
+##     渲染页面表格
+    <script src="#springUrl('/resources/js/core/tablegrid-pagination.js')"></script>
+    <script src="#springUrl('/resources/js/business/system/user.js')"></script>
+

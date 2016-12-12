@@ -1,0 +1,66 @@
+/*输入框*/
+.panel .panel-body .form-group .input{
+    padding-bottom:10px;
+}
+/*按钮*/
+.panel .panel-body .form-group .btn{
+    float:right;
+}
+/*子页面居中*/
+.page-main{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*日期控件 ---->*/
+.form_date{
+    width:150px;
+}
+
+.form_date .input-group-addon {
+    padding:2px;
+}
+/*日期控件 ---<*/
+#totalItems{
+    color:red;
+}
+#totalPages{
+    color:deepskyblue;
+}
+.pagination-info{
+    float:left;
+    margin-top: 20px;
+    font-weight: bold
+}
+
+/*ourjs : messages  layout---<*/
+.modal-open {
+    overflow: auto;
+    padding: 0 !important;
+}
+
+.modal.msg-popup {
+    top: 200px;
+}
+
+.modal.msg-popup .modal-dialog {
+    width: 300px !important;
+    margin: 30px auto 60px;
+}
+
+.modal.msg-popup .modal-body {
+    background-color: #bce8f1;
+    color: #000;
+}
+
+.modal.msg-popup .modal-content {
+    border: none;
+}
+/*progress 位置*/
+.progress{
+    width: 300px;
+    height:20px;
+    position: absolute;
+    top:300px;
+    left: 45%;
+}
